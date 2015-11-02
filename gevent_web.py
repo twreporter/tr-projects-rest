@@ -1,3 +1,4 @@
+# ref: http://flask.pocoo.org/docs/0.10/deploying/wsgi-standalone/
 from gevent.wsgi import WSGIServer
 from server import app
 

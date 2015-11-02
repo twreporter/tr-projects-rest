@@ -14,6 +14,7 @@ pip install -r requirements.txt
 ## Development
 
 ``` shell
+# set mongo database in settings.py
 python server.py
 ```
 
