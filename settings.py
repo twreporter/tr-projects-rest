@@ -389,8 +389,8 @@ article = {
         'field': 'id'
     },
     'resource_methods': ['GET', 'POST'],
-    'cache_control': 'max-age=10,must-revalidate',
-    'cache_expires': 10,
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
     'schema': schema
 }
 
