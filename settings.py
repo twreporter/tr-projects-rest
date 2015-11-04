@@ -157,6 +157,44 @@ schema = {
   'author_id': {
     'type': 'string',
   },
+  'facebook_enable': {
+    'type': 'integer',
+  },
+  'twitter_enable': {
+    'type': 'integer',
+  },
+  'facebook_author_url': {
+    'type': 'string',
+  },
+  'story_link_enable': {
+    'type': 'integer',
+  },
+  'asin': {
+    'type': 'string',
+  },
+  'story_template_prefix_epub_download': {
+    'type': 'integer',
+  },
+  'title_page_ebook': {
+    'type': 'string',
+  },
+  'publish_epub': {
+    'type': 'integer',
+  },
+  'publish_ibooks': {
+    'type': 'integer',
+  },
+  'epubs': {
+    'type': 'dict',
+    'schema': {
+      'epub' : {
+        'type': 'string',
+      },
+      'ibooks' : {
+        'type': 'string',
+      },
+    },
+  },
   'options': {
     'type': 'dict',
     'schema': {
@@ -261,7 +299,34 @@ schema = {
       'toc_icon': {
         'type': 'integer',
       },
-    }
+      'facebook_enable': {
+        'type': 'integer',
+      },
+      'twitter_enable': {
+        'type': 'integer',
+      },
+      'facebook_author_url': {
+        'type': 'string',
+      },
+      'story_link_enable': {
+        'type': 'integer',
+      },
+      'asin': {
+        'type': 'string',
+      },
+      'story_template_prefix_epub_download': {
+        'type': 'integer',
+      },
+      'title_page_ebook': {
+        'type': 'string',
+      },
+      'publish_epub': {
+        'type': 'integer',
+      },
+      'publish_ibooks': {
+        'type': 'integer',
+      },
+    },
   },
   'isbn': {
     'type': 'string',
