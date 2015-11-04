@@ -18,6 +18,6 @@ if __name__ == '__main__':
     _id = str(record['id'])
     pre = '0' * (24 - len(_id)) # used as mongo _id
     cmd = '''
-    curl -d '%s' -X PUT -H 'Content-Type: application/json' http://localhost:8080/article/%s
+    curl -d '%s' -X PUT -H 'Content-Type: application/json' http://localhost/article/%s
     ''' % (json.dumps(record), pre+_id)
     subprocess.Popen(cmd, shell=True)
