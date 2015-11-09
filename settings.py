@@ -463,3 +463,4 @@ DOMAIN = {'article': article}
 
 XML = False
 IF_MATCH = False
+X_DOMAINS = '*'
