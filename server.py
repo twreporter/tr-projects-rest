@@ -1,5 +1,4 @@
 from eve import Eve
-from eve.methods import get
 from flask import redirect, request
 import json
 
@@ -13,9 +12,10 @@ def tagSearch(name):
 def tagBulkSearch():
   data = json.loads(request.data)
   results = []
+  tc = app.test_client()
   for tag in data['tags']:
-    result = get('article', where='{"tags":{"$in":["%s"]}}' % tag)[0]
-    results.append({tag:result})
+    resp = tc.get('article/?where={"tags":{"$in":["%s"]}}' % tag)
+    results.append(json.loads(resp.data))
   return json.dumps({'results':results})
 
 if __name__ == '__main__':
