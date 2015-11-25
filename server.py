@@ -1,5 +1,6 @@
 from eve import Eve
 from flask import redirect, request
+from settings import schema
 import json
 
 app = Eve()
@@ -18,5 +19,12 @@ def tagBulkSearch():
     results.append(json.loads(resp.data))
   return json.dumps({'results':results})
 
+def remove_extra_fields(item, original):
+  accepted_fields = schema.keys()
+  for field in item.keys():
+    if field not in accepted_fields:
+      del item[field]
+
 if __name__ == '__main__':
+  app.on_replace_article += remove_extra_fields
   app.run(host='0.0.0.0', port=8080, threaded=True, debug=True)
