@@ -4,6 +4,8 @@ from settings import schema
 import json
 
 app = Eve()
+app.on_replace_article += lambda item, original: remove_extra_fields(item)
+app.on_insert_article += lambda items: remove_extra_fields(items[0])
 
 @app.route("/tag/<name>", methods=['GET'])
 def tagSearch(name):
@@ -19,12 +21,11 @@ def tagBulkSearch():
     results.append(json.loads(resp.data))
   return json.dumps({'results':results})
 
-def remove_extra_fields(item, original):
+def remove_extra_fields(item):
   accepted_fields = schema.keys()
   for field in item.keys():
     if field not in accepted_fields:
       del item[field]
 
 if __name__ == '__main__':
-  app.on_replace_article += remove_extra_fields
   app.run(host='0.0.0.0', port=8080, threaded=True, debug=True)
