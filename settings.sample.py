@@ -116,6 +116,9 @@ schema = {
   },
   'protected_tags': {
     'type': 'list',
+  },
+  'preview_image': {
+    'type': 'string',
   }
 }
 
