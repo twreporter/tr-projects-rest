@@ -24,7 +24,7 @@ def tagBulkSearch():
 def remove_extra_fields(item):
   accepted_fields = schema.keys()
   for field in item.keys():
-    if field not in accepted_fields:
+    if field not in accepted_fields and field != '_id':
       del item[field]
 
 if __name__ == '__main__':
