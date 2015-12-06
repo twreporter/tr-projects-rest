@@ -27,18 +27,5 @@ def remove_extra_fields(item):
     if field not in accepted_fields and field != '_id':
       del item[field]
 
-def filter_only_published(response):
-  data = response
-  if 'items' in data.keys():
-    for item in data['items']:
-      if not item['isPublishedVersion']:
-        data['items'].remove(item)
-  else:
-    if 'isPublishedVersion' in data.keys():
-      if not data['isPublishedVersion']:
-        data = {}
-  return data
-app.on_fetched_item_article += filter_only_published
-
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080, threaded=True, debug=True)
