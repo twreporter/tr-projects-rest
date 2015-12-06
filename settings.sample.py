@@ -128,6 +128,9 @@ article = {
         'url': 'regex("[\d]+")',
         'field': 'id'
     },
+    'datasource': {
+      'filter': { 'isPublishedVersion': True}
+    },
     'resource_methods': ['GET', 'POST'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
