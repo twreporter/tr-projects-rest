@@ -4,7 +4,7 @@ MONGO_PORT = 27017
 MONGO_DBNAME = ''
 
 # ALLOW ACTIONS
-DEBUG = True
+DEBUG = False
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE'] if DEBUG else ['GET']
 
 schema = {
