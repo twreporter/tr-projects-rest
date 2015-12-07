@@ -4,7 +4,8 @@ MONGO_PORT = 27017
 MONGO_DBNAME = ''
 
 # ALLOW ACTIONS
-ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
+DEBUG = True
+ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE'] if DEBUG else ['GET']
 
 schema = {
   'subtitle': {
