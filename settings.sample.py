@@ -91,6 +91,12 @@ schema = {
   'isPublishedVersion': {
     'type': 'boolean',
   },
+  'facebook_enable': {
+    'type': 'integer',
+  },
+  'facebook_image': {
+    'type': 'string',
+  },
   'facebook_text': {
     'type': 'string',
   },
