@@ -17,7 +17,7 @@ def tagBulkSearch():
   results = []
   tc = app.test_client()
   for tag in data['tags']:
-    resp = tc.get('article/?sort=-lastUpdate&where={"tags":{"$in":["%s"]}}' % tag)
+    resp = tc.get('article/?sort=-lastPublish&where={"tags":{"$in":["%s"]}}' % tag)
     results.append(json.loads(resp.data))
   return json.dumps({'results':results})
 
