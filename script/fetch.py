@@ -13,6 +13,7 @@ logging.info('fetch articles from atavist')
 buffer = StringIO()
 
 api = 'http://api.twreporter.org/article?max_results=40&sort=-lastPublish'
+target_folder = '/tmp/twreporters/articles/'
 
 logging.info('api: %s ', api);
 replace = [{
@@ -49,7 +50,7 @@ for i in records['_items']:
     pageBuffer = StringIO()
     fileName = i['slug']
     logging.info('get file: %s', fileName);
-    fo = open('/tmp/twreporters/articles/' + fileName, "w")
+    fo = open(target_folder + fileName, "w")
     cc.setopt(cc.URL, i['url'])
     cc.setopt(cc.WRITEDATA, pageBuffer)
     cc.perform()
