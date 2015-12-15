@@ -17,19 +17,22 @@ api = 'http://api.twreporter.org/article?max_results=40&sort=-lastPublish'
 logging.info('api: %s ', api);
 replace = [{
             "orig": "https://twreporter.atavist.com/view/", 
-            "new":"http://ats-dev.twreporter.org/view/"
+            "new":"https://www.twreporter.org/view/"
         },{
             "orig": "https://twreporter.atavist.com/data/",
-            "new":"http://ats-dev.twreporter.org/data/"
+            "new":"https://www.twreporter.org/data/"
         },{
             "orig":'href="/data/',
-            "new":'href="http://ats-dev.twreporter.org/data/'
+            "new":'href="https://www.twreporter.org/data/'
         },{
             "orig": "atavist.com/data/files/organization/60826/", 
             "new": "www.twreporter.org/data/files/organization/60826/"
         }, {
             "orig": "dh1rvgpokacch.cloudfront.net/atavist/60826", 
             "new": "www.twreporter.org/data/files/organization/60826"
+        }, {
+            "orig": "/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png",
+            "new": "https://www.twreporter.org/data/files/organization/60826/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png"
         }] 
 
 c = pycurl.Curl()
