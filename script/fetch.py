@@ -1,13 +1,36 @@
 #! /usr/bin/python
-
+from datetime import datetime
+import logging
 import pycurl
 import json
 from StringIO import StringIO
 
+_time = datetime.now().strftime("%Y-%m-%d %H:%M");
+logging.basicConfig(filename='/var/log/fetch-' + _time + '.log',level=logging.INFO)
+
+logging.info('fetch articles from atavist')
+
 buffer = StringIO()
 
 api = 'http://api.twreporter.org/article?max_results=40&sort=-lastPublish'
-replace = [{"orig": "https://twreporter.atavist.com/view/", "new":"http://ats-dev.twreporter.org/view/"},{"orig":"https://twreporter.atavist.com/data/","new":"http://ats-dev.twreporter.org/data/"},{"orig":'href="/data/',"new":'href="http://ats-dev.twreporter.org/data/'}] 
+
+logging.info('api: %s ', api);
+replace = [{
+            "orig": "https://twreporter.atavist.com/view/", 
+            "new":"http://ats-dev.twreporter.org/view/"
+        },{
+            "orig": "https://twreporter.atavist.com/data/",
+            "new":"http://ats-dev.twreporter.org/data/"
+        },{
+            "orig":'href="/data/',
+            "new":'href="http://ats-dev.twreporter.org/data/'
+        },{
+            "orig": "atavist.com/data/files/organization/60826/", 
+            "new": "www.twreporter.org/data/files/organization/60826/"
+        }, {
+            "orig": "dh1rvgpokacch.cloudfront.net/atavist/60826", 
+            "new": "www.twreporter.org/data/files/organization/60826"
+        }] 
 
 c = pycurl.Curl()
 cc = pycurl.Curl()
@@ -16,9 +39,13 @@ c.setopt(c.WRITEDATA, buffer)
 c.perform()
 result = buffer.getvalue()
 records = json.loads(result, encoding="utf-8")
+
+logging.debug('records from api: %s', json.dumps(records));
+
 for i in records['_items']:
     pageBuffer = StringIO()
     fileName = i['slug']
+    logging.info('get file: %s', fileName);
     fo = open(fileName, "w")
     cc.setopt(cc.URL, i['url'])
     cc.setopt(cc.WRITEDATA, pageBuffer)
@@ -32,7 +59,6 @@ for i in records['_items']:
     fo.close()
     # print(body)
 
+logging.info('fetching completed');
 cc.close()
 c.close()    
-
-
