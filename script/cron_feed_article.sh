@@ -1,5 +1,8 @@
 #! /bin/bash
+
+file_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $file_path
 echo 'fetching articles'
-`python ./fetch.py`
+sudo ./fetch.py
 echo 'update articles'
-`./sync_article.sh`
+./sync_articles.sh
