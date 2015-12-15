@@ -33,7 +33,7 @@ replace = [{
             "new": "www.twreporter.org/data/files/organization/60826"
         }, {
             "orig": "src=\"/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png",
-            "new": "https://www.twreporter.org/data/files/organization/60826/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png"
+            "new": "src=\"https://www.twreporter.org/data/files/organization/60826/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png"
         }] 
 
 c = pycurl.Curl()
