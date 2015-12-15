@@ -31,7 +31,7 @@ replace = [{
             "orig": "dh1rvgpokacch.cloudfront.net/atavist/60826", 
             "new": "www.twreporter.org/data/files/organization/60826"
         }, {
-            "orig": "/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png",
+            "orig": "src=\"/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png",
             "new": "https://www.twreporter.org/data/files/organization/60826/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png"
         }] 
 
