@@ -32,7 +32,7 @@ replace = [{
             "new": "www.twreporter.org/data/files/organization/60826"
         }, {
             "orig": "src=\"/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png",
-            "new": "https://www.twreporter.org/data/files/organization/60826/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png"
+            "new": "src=\"https://www.twreporter.org/data/files/organization/60826/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png"
         }] 
 
 c = pycurl.Curl()
@@ -49,7 +49,7 @@ for i in records['_items']:
     pageBuffer = StringIO()
     fileName = i['slug']
     logging.info('get file: %s', fileName);
-    fo = open(fileName, "w")
+    fo = open('/tmp/twreporters/articles/' + fileName, "w")
     cc.setopt(cc.URL, i['url'])
     cc.setopt(cc.WRITEDATA, pageBuffer)
     cc.perform()
