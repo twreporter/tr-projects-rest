@@ -24,9 +24,17 @@ replace = [{
             "orig": "https://twreporter.atavist.com/view/", 
             "new":"https://www.twreporter.org/view/"
         }, {
-            # canonical
+            # canonical url
             "orig": "<link rel=\"canonical\" href=\"https://twreporter.atavist.com/",
             "new": "<link rel=\"canonical\" href=\"https://www.twreporter.org/a/"
+        }, {
+            # change domain
+            "orig": "<meta property=\"og:image\" content=\"https://twreporter.atavist.com/",
+            "new": "<meta property=\"og:image\" content=\"https://www.twreporter.org/"
+        }, {
+            # change domain
+            "orig": "<meta name=\"twitter:image\" content=\"https://twreporter.atavist.com/",
+            "new": "<meta name=\"twitter:image\" content=\"https://www.twreporter.org/"
         }] 
 
 c = pycurl.Curl()
