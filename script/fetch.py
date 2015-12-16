@@ -1,8 +1,11 @@
 #! /usr/bin/python
+# -*- coding: utf8 -*-
+
 from datetime import datetime
 import logging
 import pycurl
 import json
+import re
 from StringIO import StringIO
 
 _time = datetime.now().strftime("%Y-%m-%d %H:%M");
@@ -17,23 +20,13 @@ target_folder = '/tmp/twreporters/articles/'
 
 logging.info('api: %s ', api);
 replace = [{
+            # js & css files
             "orig": "https://twreporter.atavist.com/view/", 
             "new":"https://www.twreporter.org/view/"
-        },{
-            "orig": "https://twreporter.atavist.com/data/",
-            "new":"https://www.twreporter.org/data/"
-        },{
-            "orig":'href="/data/',
-            "new":'href="https://www.twreporter.org/data/'
-        },{
-            "orig": "atavist.com/data/files/organization/60826/", 
-            "new": "www.twreporter.org/data/files/organization/60826/"
         }, {
-            "orig": "dh1rvgpokacch.cloudfront.net/atavist/60826", 
-            "new": "www.twreporter.org/data/files/organization/60826"
-        }, {
-            "orig": "src=\"/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png",
-            "new": "src=\"https://www.twreporter.org/data/files/organization/60826/data/files/organization/60826/image/derivative/cropandscale~64x64~favicon-1450079771-87.png"
+            # canonical
+            "orig": "<link rel=\"canonical\" href=\"https://twreporter.atavist.com/",
+            "new": "<link rel=\"canonical\" href=\"https://www.twreporter.org/a/"
         }] 
 
 c = pycurl.Curl()
@@ -59,6 +52,11 @@ for i in records['_items']:
     # In Python 2, we can print it without knowing what the encoding is.
     for str_replace in replace:
         body = body.replace(str_replace['orig'], str_replace['new'])
+    
+    # append 報導者
+    body = re.sub(r'<meta property="og:title" content="(.*?)"', r'<meta property="og:title" content="\1／報導者"' , body)
+    body = re.sub(r'<meta name="twitter:title" content="(.*?)"', r'<meta name="twitter:title" content="\1／報導者"' , body)
+
     fo.write(body)
     fo.close()
     # print(body)
