@@ -30,4 +30,5 @@ for (@{ $api->{_items} }) {
         pubDate => scalar localtime($_->{lastPublish}),
     );
 }
-$rss->save("rss2.xml");
+# $rss->save("rss2.xml");
+print $rss->as_string

@@ -1,7 +1,7 @@
 from eve import Eve
 from flask import redirect, request
 from settings import schema
-import json
+import json, os
 
 app = Eve()
 app.on_replace_article += lambda item, original: remove_extra_fields(item)
@@ -20,6 +20,10 @@ def tagBulkSearch():
     resp = tc.get('article/?sort=-lastPublish&where={"tags":{"$in":["%s"]}}' % tag)
     results.append(json.loads(resp.data))
   return json.dumps({'results':results})
+
+@app.route("/rss2.xml")
+def getRssFromPerl():
+  return os.popen('perl script/rss.pl').read()
 
 def remove_extra_fields(item):
   accepted_fields = schema.keys()
