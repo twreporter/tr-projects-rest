@@ -3,6 +3,7 @@
 
 from datetime import datetime
 import logging
+import os
 import pycurl
 import json
 import re
@@ -56,6 +57,24 @@ for i in records['_items']:
     cc.setopt(cc.WRITEDATA, pageBuffer)
     cc.perform()
     body = pageBuffer.getvalue()
+    # pre-load the js and css first
+    preload = ["style.css", "script.js"]
+    for f in preload:
+        pattern = "https:\/\/twreporter\.atavist\.com\/view\/twreporter\/" + i['slug'] + "\/" + f + "\?bump\&\d+"
+        match = re.search(pattern, body)
+
+        if match:
+            assetBuffer = StringIO()
+            cc.setopt(cc.URL, match.group(0))
+            cc.setopt(cc.WRITEDATA, assetBuffer)
+            cc.perform()
+            asset = assetBuffer.getvalue()
+            if (not os.path.isdir(target_folder + i["slug"] + "-asset")):
+                os.mkdir(target_folder + i["slug"] + "-asset")
+            asset_file = open(target_folder + i["slug"] + "-asset/" + f, "w")
+            # we should have the exception handler
+            asset_file.write(asset)
+            asset_file.close
     # Body is a string in some encoding.
     # In Python 2, we can print it without knowing what the encoding is.
     for str_replace in replace:
