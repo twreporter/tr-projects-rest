@@ -7,7 +7,11 @@ import os
 import pycurl
 import json
 import re
+import sys
 from StringIO import StringIO
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 _time = datetime.now().strftime("%Y-%m-%d %H:%M");
 logging.basicConfig(filename='/var/log/fetch-' + _time + '.log',level=logging.INFO)
@@ -75,6 +79,8 @@ for i in records['_items']:
             # we should have the exception handler
             asset_file.write(asset)
             asset_file.close
+            if (os.path.isfile(target_folder + i["slug"] + "-" + f)):
+                body = body.replace(match.group(0), replace_url)
     # Body is a string in some encoding.
     # In Python 2, we can print it without knowing what the encoding is.
     for str_replace in replace:
