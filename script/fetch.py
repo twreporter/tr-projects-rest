@@ -74,8 +74,6 @@ for i in records['_items']:
             asset_file = open(target_folder + i["slug"] + "-" + f, "w")
             # we should have the exception handler
             asset_file.write(asset)
-            print match.group(0)
-            print replace_url
             asset_file.close
     # Body is a string in some encoding.
     # In Python 2, we can print it without knowing what the encoding is.
