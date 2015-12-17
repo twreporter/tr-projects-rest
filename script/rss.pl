@@ -24,6 +24,7 @@ for (@{ $api->{_items} }) {
         title => $_->{title},
         description => $_->{excerpt},
         permaLink => ($_->{story_link} or next),
+        link => ($_->{story_link} or next),
         dc => {
             creator => ($_->{byline} or next),
         },
