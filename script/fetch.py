@@ -69,11 +69,13 @@ for i in records['_items']:
             cc.setopt(cc.WRITEDATA, assetBuffer)
             cc.perform()
             asset = assetBuffer.getvalue()
-            if (not os.path.isdir(target_folder + i["slug"] + "-asset")):
-                os.mkdir(target_folder + i["slug"] + "-asset")
-            asset_file = open(target_folder + i["slug"] + "-asset/" + f, "w")
+            filePath = target_folder + i["slug"] + "-" + f
+            replace_url = 'https://www.twreporter.org/a/' + i["slug"] + "-" + f
+            asset_file = open(target_folder + i["slug"] + "-" + f, "w")
             # we should have the exception handler
             asset_file.write(asset)
+            print match.group(0)
+            print replace_url
             asset_file.close
     # Body is a string in some encoding.
     # In Python 2, we can print it without knowing what the encoding is.
