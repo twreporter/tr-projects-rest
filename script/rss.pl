@@ -27,7 +27,8 @@ for (@{ $api->{_items} }) {
         dc => {
             creator => ($_->{byline} or next),
         },
-        pubDate => scalar localtime($_->{lastPublish}),
+        # pubDate => scalar localtime($_->{lastPublish}),
+        pubDate => gmtime($_->{lastPublish}) . " +0000",
     );
 }
 $rss->save("/tmp/twreporters/articles/rss2.xml");
