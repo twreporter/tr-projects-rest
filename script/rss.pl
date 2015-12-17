@@ -30,4 +30,4 @@ for (@{ $api->{_items} }) {
         pubDate => scalar localtime($_->{lastPublish}),
     );
 }
-$rss->save("rss2.xml");
+$rss->save("/tmp/twreporters/articles/rss2.xml");
