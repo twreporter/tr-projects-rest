@@ -6,4 +6,4 @@ cd $file_path
 echo 'fetching articles'
 sudo ./fetch.py
 echo 'update articles'
-./sync_articles.sh
+./sync_articles.pl
