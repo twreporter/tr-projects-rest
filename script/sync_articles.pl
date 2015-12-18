@@ -17,4 +17,4 @@ while (my $file = readdir(DIR)) {
 }
 close (DIR);
 
-`rm -f /tmp/twreporters/articles/*`
+`sudo rm -f /tmp/twreporters/articles/*`

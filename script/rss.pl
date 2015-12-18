@@ -18,16 +18,18 @@ $rss->image(
     link => "https://www.twreporter.org/",
 );
 
-my $api = decode_json(get('https://www.twreporter.org/api/article?max_results=100'));
+my $api = decode_json(get('https://www.twreporter.org/api/article?max_results=100&sort=-lastUpdate'));
 for (@{ $api->{_items} }) {
     $rss->add_item(
         title => $_->{title},
         description => $_->{excerpt},
         permaLink => ($_->{story_link} or next),
+        link => ($_->{story_link} or next),
         dc => {
             creator => ($_->{byline} or next),
         },
-        pubDate => scalar localtime($_->{lastPublish}),
+        # pubDate => scalar localtime($_->{lastPublish}),
+        pubDate => gmtime($_->{lastPublish}) . " +0000",
     );
 }
-$rss->save("rss2.xml");
+$rss->save("/tmp/twreporters/articles/rss2.xml");
