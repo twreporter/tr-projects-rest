@@ -8,4 +8,4 @@ sudo ./fetch.py
 echo 'making rss'
 ./rss.pl
 echo 'update articles'
-./sync_articles.pl
+./sync_articles.sh
