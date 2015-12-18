@@ -12,7 +12,7 @@ while (my $file = readdir(DIR)) {
         $mime_type = 'text/css'
     }
     my $gsutil_string = "gsutil -h \"Content-Type:".$mime_type."\" -h \"Cache-Control:max-age=3600,public\" -h \"Content-Language:zh\" cp -z html -a public-read /tmp/twreporters/articles/".$file." gs://twreporter-article.twreporter.org";
-    print $gsutil_string."\n";
+    `$gsutil_string`;
         
 }
 close (DIR);
