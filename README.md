@@ -26,4 +26,4 @@ sudo python gevent_web.py &
 
 ## Script
 
-- FeedData.py : insert data from external url (JSON format)
+- scripts have been moved to https://github.com/twreporter/tr-projects-crontab
