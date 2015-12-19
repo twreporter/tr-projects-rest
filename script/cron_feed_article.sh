@@ -6,6 +6,6 @@ cd $file_path
 echo 'fetching articles'
 sudo ./fetch.py
 echo 'making rss'
-./rss.pl
+/usr/bin/env perl rss.pl
 echo 'update articles'
-./sync_articles.pl
+/usr/bin/env perl sync_articles.pl
