@@ -4,6 +4,7 @@ use strict;
 use XML::RSS;
 use LWP::Simple;
 use JSON;
+use POSIX qw(strftime);
 my $rss = new XML::RSS(version => '2.0');
 $rss->channel(
     title => "報導者",
@@ -28,8 +29,7 @@ for (@{ $api->{_items} }) {
         dc => {
             creator => ($_->{byline} or next),
         },
-        # pubDate => scalar localtime($_->{lastPublish}),
-        pubDate => gmtime($_->{lastPublish}) . " +0000",
+        pubDate => strftime("%a, %d %b %Y %H:%M:%S %z", localtime($_->{lastPublish})),
     );
 }
 $rss->save("/tmp/twreporters/articles/rss2.xml");
