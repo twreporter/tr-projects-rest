@@ -74,13 +74,13 @@ for i in records['stories']:
             cc.perform()
             asset = assetBuffer.getvalue()
             filePath = target_folder + i["slug"] + "-" + f
-            replace_url = 'https://www.twreporter.org/a/' + i["slug"] + "-" + f
+            replace_url = 'https://www.twreporter.org/a/' + i["slug"] + "-" + f + "?bump=false"
             asset_file = open(target_folder + i["slug"] + "-" + f, "w")
             # we should have the exception handler
             asset_file.write(asset)
             asset_file.close
-            #if (os.path.isfile(target_folder + i["slug"] + "-" + f)):
-            #    body = body.replace(match.group(0), replace_url)
+            if (os.path.isfile(target_folder + i["slug"] + "-" + f)):
+                body = body.replace(match.group(0), replace_url)
     # Body is a string in some encoding.
     # In Python 2, we can print it without knowing what the encoding is.
     for str_replace in replace:
