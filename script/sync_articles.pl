@@ -17,6 +17,6 @@ while (my $file = readdir(DIR)) {
 }
 close (DIR);
 
-`gsutil -m mv -a public-read gs://twreporter-article.twreporter.org/uploads/* gs://twreporter-article.twreporter.org/`
+`gsutil -m mv -a public-read gs://twreporter-article.twreporter.org/uploads/* gs://twreporter-article.twreporter.org/`;
 
-`sudo rm -f /tmp/twreporters/articles/*`
+`sudo rm -f /tmp/twreporters/articles/*`;
