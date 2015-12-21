@@ -27,3 +27,7 @@ sudo python gevent_web.py &
 ## Script
 
 - scripts have been moved to https://github.com/twreporter/tr-projects-crontab
+
+# License
+
+MIT http://mit-license.org 
