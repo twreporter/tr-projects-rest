@@ -1,5 +1,5 @@
 from eve import Eve
-from flask import redirect, request
+from flask import redirect, request, Response
 from settings import schema
 import json
 
@@ -15,11 +15,20 @@ def tagSearch(name):
 def tagBulkSearch():
   data = json.loads(request.data)
   results = []
+
+  headers = dict(request.headers)
+  del headers['Content-Length']
+
   tc = app.test_client()
   for tag in data['tags']:
-    resp = tc.get('article/?sort=-lastPublish&where={"tags":{"$in":["%s"]}}' % tag)
+    resp = tc.get('article/?sort=-lastPublish&where={"tags":{"$in":["%s"]}}' % tag, headers=headers)
     results.append(json.loads(resp.data))
-  return json.dumps({'results':results})
+
+  headers = dict(resp.headers)
+  del headers['Content-Length']
+
+  resp = Response(json.dumps({'results':results}), headers=headers)
+  return resp
 
 def remove_extra_fields(item):
   accepted_fields = schema.keys()
