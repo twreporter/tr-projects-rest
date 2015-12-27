@@ -11,6 +11,15 @@ app.on_insert_article += lambda items: remove_extra_fields(items[0])
 def tagSearch(name):
   return redirect('/article/?where={"tags":{"$in":["%s"]}}' % name, code=302)
 
+# TODO
+# [issue] /tags/ doesn't handle preflight requests
+# [solve] redirect /tags/ to /article when the request's method is OPTIONS
+# [note]  other url's preflight requests is now handled by eve
+# [todo]  preflight requests should be handled in one place for all urls
+@app.route("/tags/", methods=['OPTIONS'])
+def handlePreflightRequests(name=None):
+  return redirect('/article', code=302)
+
 @app.route("/tags/", methods=['POST'])
 def tagBulkSearch():
   data = json.loads(request.data)
