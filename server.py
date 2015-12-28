@@ -18,7 +18,16 @@ def tagSearch(name):
 # [todo]  preflight requests should be handled in one place for all urls
 @app.route("/tags/", methods=['OPTIONS'])
 def handlePreflightRequests(name=None):
-  return redirect('/article', code=302)
+  headers = dict(request.headers)
+
+  tc = app.test_client()
+  resp = tc.get('article', headers = headers)
+
+  headers = dict(resp.headers)
+  del headers['Content-Length']
+
+  resp = Response("", headers=headers)
+  return resp
 
 @app.route("/tags/", methods=['POST'])
 def tagBulkSearch():
