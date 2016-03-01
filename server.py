@@ -1,6 +1,6 @@
 from eve import Eve
 from flask import redirect, request, Response
-from settings import schema
+from settings import posts, users
 import json
 
 app = Eve()
@@ -9,7 +9,7 @@ app.on_insert_article += lambda items: remove_extra_fields(items[0])
 
 @app.route("/tag/<name>", methods=['GET'])
 def tagSearch(name):
-  return redirect('/article/?where={"tags":{"$in":["%s"]}}' % name, code=302)
+  return redirect('/posts/?where={"tags":{"$in":["%s"]}}' % name, code=302)
 
 # TODO
 # [issue] /tags/ doesn't handle preflight requests
