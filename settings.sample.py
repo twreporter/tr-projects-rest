@@ -7,7 +7,7 @@ MONGO_DBNAME = ''
 DEBUG = False
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE'] if DEBUG else ['GET']
 
-schema = {
+post_schema = {
   'name': {
     'type': 'string',
   },
@@ -66,7 +66,62 @@ schema = {
   }
 }
 
+user_schema = {
+  'name': {
+    'type': 'string',
+  },
+  'email': {
+    'type': 'string',
+  },
+  'role': {
+    'type': 'string',
+  },
+  'company': {
+    'type': 'string',
+  },
+  'address': {
+    'type': 'string',
+  }
+}
+
+contact_schema = {
+  'name': {
+    'type': 'string',
+  },
+  'email': {
+    'type': 'string',
+  },
+  'homepage': {
+    'type': 'string',
+  },
+  'facebook': {
+    'type': 'string',
+  },
+  'twitter': {
+    'type': 'string',
+  },
+  'instantgram': {
+    'type': 'string',
+  },
+  'bio': {
+    'type': 'string',
+  }
+}
+
 posts = {
+    'item_title': 'post',
+    'additional_lookup': {
+        'url': 'regex("[\d]+")',
+        'field': 'slug'
+    },
+    'resource_methods': ['GET', 'POST'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': True,
+    'schema': post_schema
+}
+
+users = {
     'item_title': 'post',
     'additional_lookup': {
         'url': 'regex("[\d]+")',
@@ -76,14 +131,29 @@ posts = {
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': True,
-    'schema': schema
+    'schema': user_schema
 }
 
-DOMAIN = {'posts': posts}
+contacts = {
+    'item_title': 'post',
+    'additional_lookup': {
+        'url': 'regex("[\d]+")',
+        'field': 'name'
+    },
+    'resource_methods': ['GET', 'POST'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': True,
+    'schema': contact_schema
+}
+
+DOMAIN = {
+    'posts': posts,
+    'users': users,
+    }
 
 XML = False
 IF_MATCH = False
 X_DOMAINS = '*'
 X_HEADERS = ['Content-Type']
 PAGINATION_DEFAULT = 10
-PAGINATION_LIMIT = 100
