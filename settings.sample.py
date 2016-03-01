@@ -122,7 +122,7 @@ posts = {
 }
 
 users = {
-    'item_title': 'post',
+    'item_title': 'user',
     'additional_lookup': {
         'url': 'regex("[\d]+")',
         'field': 'name'
@@ -135,9 +135,9 @@ users = {
 }
 
 contacts = {
-    'item_title': 'post',
+    'item_title': 'contact',
     'additional_lookup': {
-        'url': 'regex("[\d]+")',
+        'url': 'regex(".+")',
         'field': 'name'
     },
     'resource_methods': ['GET', 'POST'],
@@ -150,6 +150,7 @@ contacts = {
 DOMAIN = {
     'posts': posts,
     'users': users,
+    'contacts': contacts,
     }
 
 XML = False
