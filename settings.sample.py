@@ -1,7 +1,7 @@
 # MONGO DATABASE SETTINGS
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
-MONGO_DBNAME = ''
+MONGO_DBNAME = 'keystone-test'  # YOU SHOULD REPLACE THE DBNAME
 
 # ALLOW ACTIONS
 DEBUG = False
@@ -117,20 +117,20 @@ posts = {
     'resource_methods': ['GET', 'POST'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
-    'allow_unknown': True,
+    'allow_unknown': False,
     'schema': post_schema
 }
 
 users = {
     'item_title': 'user',
     'additional_lookup': {
-        'url': 'regex("[\d]+")',
+        'url': 'regex(".+")',
         'field': 'name'
     },
     'resource_methods': ['GET', 'POST'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
-    'allow_unknown': True,
+    'allow_unknown': False,
     'schema': user_schema
 }
 
@@ -147,10 +147,28 @@ contacts = {
     'schema': contact_schema
 }
 
+tags = {
+    'item_title': 'tag',
+    'additional_lookup': {
+        'url': 'regex(".+")',
+        'field': 'name'
+    },
+    'resource_methods': ['GET', 'POST'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': True,
+    'schema': {
+      'name': {
+        'type': 'string',
+      }
+    }
+}
+
 DOMAIN = {
     'posts': posts,
     'users': users,
     'contacts': contacts,
+    'tags': tags,
     }
 
 XML = False
