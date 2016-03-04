@@ -1,7 +1,7 @@
 # MONGO DATABASE SETTINGS
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
-MONGO_DBNAME = 'keystone-test'  # YOU SHOULD REPLACE THE DBNAME
+MONGO_DBNAME = 'keystone-test'
 
 # ALLOW ACTIONS
 DEBUG = False
@@ -26,8 +26,16 @@ post_schema = {
   'state': {
     'type': 'string',
   },
-  'author': {
+  'authors': {
     'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'contacts',
+            'field': '_id',
+            'embeddable': True
+        },
+    },
   },
   'publishedDate': {
     'type': 'string',
@@ -37,9 +45,25 @@ post_schema = {
   },
   'categories': {
     'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'postcategories',
+            'field': '_id',
+            'embeddable': True
+         },
+     },
   },
   'tags': {
     'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'tags',
+            'field': '_id',
+            'embeddable': True
+         },
+     },
   },
   'style': {
     'type': 'string',
@@ -57,6 +81,14 @@ post_schema = {
   },
   'relateds': {
     'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'posts',
+            'field': '_id',
+            'embeddable': True
+         },
+     }, 
   },
   'og_title': {
     'type': 'string',
@@ -164,11 +196,29 @@ tags = {
     }
 }
 
+postcategories = {
+    'item_title': 'postcategory',
+    'additional_lookup': {
+        'url': 'regex(".+")',
+        'field': 'name'
+    },
+    'resource_methods': ['GET', 'POST'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': True,
+    'schema': {
+      'name': {
+        'type': 'string',
+      }
+    }
+}
+
 DOMAIN = {
     'posts': posts,
     'users': users,
     'contacts': contacts,
     'tags': tags,
+    'postcategories': postcategories,
     }
 
 XML = False
