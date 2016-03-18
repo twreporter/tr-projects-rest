@@ -72,10 +72,20 @@ post_schema = {
     'type': 'dict',
     'schema': {
       'brief': {
-        'type': 'string',
+        'type': 'dict',
+        'schema': {
+            "html": {
+                "type": "string",
+            },
+        },
       },
       'extended': {
-        'type': 'string',
+        'type': 'dict',
+        'schema': {
+            "html": {
+                "type": "string",
+            },
+        },
       },
     }
   },
