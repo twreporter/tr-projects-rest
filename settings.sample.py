@@ -72,10 +72,20 @@ post_schema = {
     'type': 'dict',
     'schema': {
       'brief': {
-        'type': 'string',
+        'type': 'dict',
+        'schema': {
+            "html": {
+                "type": "string",
+            },
+        },
       },
       'extended': {
-        'type': 'string',
+        'type': 'dict',
+        'schema': {
+            "html": {
+                "type": "string",
+            },
+        },
       },
     }
   },
@@ -146,7 +156,7 @@ posts = {
         'url': 'regex("[\d]+")',
         'field': 'slug'
     },
-    'resource_methods': ['GET', 'POST'],
+    'resource_methods': ['GET'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
@@ -159,7 +169,7 @@ users = {
         'url': 'regex(".+")',
         'field': 'name'
     },
-    'resource_methods': ['GET', 'POST'],
+    'resource_methods': ['GET'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
@@ -172,7 +182,7 @@ contacts = {
         'url': 'regex(".+")',
         'field': 'name'
     },
-    'resource_methods': ['GET', 'POST'],
+    'resource_methods': ['GET'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': True,
@@ -185,7 +195,7 @@ tags = {
         'url': 'regex(".+")',
         'field': 'name'
     },
-    'resource_methods': ['GET', 'POST'],
+    'resource_methods': ['GET'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': True,
@@ -202,7 +212,7 @@ postcategories = {
         'url': 'regex(".+")',
         'field': 'name'
     },
-    'resource_methods': ['GET', 'POST'],
+    'resource_methods': ['GET'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': True,
