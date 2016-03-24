@@ -150,6 +150,51 @@ contact_schema = {
   }
 }
 
+member_schema = {
+  'member_id': {
+    'type': 'string',
+  },
+  'email': {
+    'type': 'string',
+  },
+  'password': {
+    'type': 'string',
+  },
+  'country': {
+    'type': 'string',
+  },
+  'city': {
+    'type': 'string',
+  },
+  'address': {
+    'type': 'string',
+  },
+  'zip': {
+    'type': 'interger',
+  },
+  'gender': {
+    'type': 'string',
+  },
+  'state': {
+      'type': 'dict',
+      'schema': {
+          'post': {
+            'type': 'objectid',
+            'data_relation': {
+              'resource': 'posts',
+              'field': '_id',
+              'embeddable': True
+            },
+          },
+          'position': {
+            'type': 'string',
+          }
+      },
+  'create_date': {
+    'type': 'datetime',
+  }
+}
+
 posts = {
     'item_title': 'post',
     'additional_lookup': {
@@ -174,6 +219,19 @@ users = {
     'cache_expires': 300,
     'allow_unknown': False,
     'schema': user_schema
+}
+
+members = {
+    'item_title': 'member',
+    'additional_lookup': {
+        'url': 'regex("\w+")',
+        'field': 'member_id'
+    },
+    'resource_methods': ['GET', 'POST'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': False,
+    'schema': member_schema
 }
 
 contacts = {
@@ -226,6 +284,7 @@ postcategories = {
 DOMAIN = {
     'posts': posts,
     'users': users,
+    'members': members,
     'contacts': contacts,
     'tags': tags,
     'postcategories': postcategories,
