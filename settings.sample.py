@@ -8,69 +8,135 @@ DEBUG = False
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE'] if DEBUG else ['GET']
 
 schema = {
-  'name': {
+  'subtitle': {
     'type': 'string',
   },
-  'slug': {
+  'availability': {
+    'type': 'integer',
+  },
+  'byline': {
     'type': 'string',
   },
   'title': {
     'type': 'string',
   },
-  'subtitle': {
+  'firstImage': {
     'type': 'string',
   },
-  'byline': {
+  'excerpt': {
     'type': 'string',
   },
-  'state': {
-    'type': 'string',
-  },
-  'author': {
+  'preset_tags': {
     'type': 'list',
   },
-  'publishedDate': {
+  'thumbnail': {
     'type': 'string',
   },
-  'image': {
-    'type': 'string',
-  },
-  'categories': {
-    'type': 'list',
-  },
-  'tags': {
-    'type': 'list',
-  },
-  'style': {
-    'type': 'string',
-  },
-  'content': {
+  'metadata': {
     'type': 'dict',
     'schema': {
-      'brief': {
-        'type': 'string',
-      },
-      'extended': {
+      'metadata_text_key_name': {
         'type': 'string',
       },
     }
   },
-  'relateds': {
-    'type': 'list',
-  },
-  'og_title': {
+  'lastUpdate': {
     'type': 'string',
   },
-  'og_description': {
+  'tags': {
+    'type': 'list',
+  },
+  'author_display': {
+    'type': 'string',
+  },
+  'slug': {
+    'type': 'string',
+  },
+  'story_type': {
+    'type': 'string',
+  },
+  'created': {
+    'type': 'string',
+  },
+  'published': {
+    'type': 'string',
+  },
+  'story_link': {
+    'type': 'string',
+  },
+  'twitter_text': {
+    'type': 'string',
+  },
+  'author_id': {
+    'type': 'string',
+  },
+  'author_list': {
+    'type': 'list',
+  },
+  'lastPublish': {
+    'type': 'string',
+  },
+  'user_id': {
+    'type': 'string',
+  },
+  'square_image': {
+    'type': 'string',
+  },
+  'price_credits': {
+    'type': 'string',
+  },
+  'createdBy': {
+    'type': 'string',
+  },
+  'isPublishedVersion': {
+    'type': 'boolean',
+  },
+  'facebook_enable': {
+    'type': 'integer',
+  },
+  'facebook_image': {
+    'type': 'string',
+  },
+  'facebook_text': {
+    'type': 'string',
+  },
+  'id': {
+    'type': 'integer',
+  },
+  'atavist_id': {
+    'type': 'integer',
+  },
+  'status': {
+    'type': 'string',
+  },
+  'pub_date': {
+    'type': 'string',
+  },
+  'category_id': {
+    'type': 'string',
+  },
+  'lastUpdateBy': {
+    'type': 'string',
+  },
+  'url': {
+    'type': 'string',
+  },
+  'protected_tags': {
+    'type': 'list',
+  },
+  'preview_image': {
     'type': 'string',
   }
 }
 
-posts = {
-    'item_title': 'post',
+article = {
+    'item_title': 'article',
     'additional_lookup': {
         'url': 'regex("[\d]+")',
-        'field': 'name'
+        'field': 'id'
+    },
+    'datasource': {
+      'filter': { 'isPublishedVersion': True}
     },
     'resource_methods': ['GET', 'POST'],
     'cache_control': 'max-age=300,must-revalidate',
@@ -79,7 +145,7 @@ posts = {
     'schema': schema
 }
 
-DOMAIN = {'posts': posts}
+DOMAIN = {'article': article}
 
 XML = False
 IF_MATCH = False
