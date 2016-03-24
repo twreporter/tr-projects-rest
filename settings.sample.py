@@ -170,7 +170,7 @@ member_schema = {
     'type': 'string',
   },
   'zip': {
-    'type': 'string',
+    'type': 'interger',
   },
   'gender': {
     'type': 'string',
@@ -191,7 +191,7 @@ member_schema = {
           }
       },
   'create_date': {
-    'type': 'string',
+    'type': 'datetime',
   }
 }
 
