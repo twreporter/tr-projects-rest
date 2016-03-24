@@ -6,21 +6,21 @@ import json
 def before_returning_posts(response):
     items = response['_items']
     new_response_array = []
-    content_type = ['brief', 'extended']
-    content_data_type = request.args.get('content_data_type')
-    if content_data_type: # check if we need to add the filter
-        content_data_type_array = content_data_type.split(',')
+    paragraph = ['brief', 'extended']
+    content_type = request.args.get('content_type')
+    if content_type: # check if we need to add the filter
+        content_type_array = content_type.split(',')
         for item in items:
             new_item = {}
-            for type_seq in content_type:
+            for type_seq in paragraph:
                 new_item[type_seq] = {}
-                for data_type in content_data_type_array:
+                for data_type in content_type_array:
                     if data_type in item['content'][type_seq].keys():
                         new_item[type_seq][data_type] = item['content'][type_seq][data_type]
             item['content'] = new_item
             new_response_array.append(item)
         response['_items'] = new_response_array
-    else: # there is no parameter for content_type, so we won't add the filter for the content
+    else: # there is no parameter for paragraph, so we won't add the filter for the content
         return response
 
 app = Eve()
