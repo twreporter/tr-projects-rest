@@ -114,6 +114,7 @@ user_schema = {
   },
   'email': {
     'type': 'string',
+    'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
   },
   'role': {
     'type': 'string',
@@ -132,6 +133,7 @@ contact_schema = {
   },
   'email': {
     'type': 'string',
+    'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
   },
   'homepage': {
     'type': 'string',
@@ -153,12 +155,15 @@ contact_schema = {
 member_schema = {
   'member_id': {
     'type': 'string',
+    'required': True,
   },
   'email': {
     'type': 'string',
+    'regex': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
   },
   'password': {
     'type': 'string',
+    'required': True,
   },
   'country': {
     'type': 'string',
@@ -190,6 +195,7 @@ member_schema = {
             'type': 'string',
           }
       },
+  },
   'create_date': {
     'type': 'datetime',
   }
@@ -200,6 +206,27 @@ posts = {
     'additional_lookup': {
         'url': 'regex("[\d]+")',
         'field': 'slug'
+    },
+    'datasource': {
+        'source': 'posts',
+        'filter': {'state': 'published'},
+    },
+    'resource_methods': ['GET'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': False,
+    'schema': post_schema
+}
+
+drafts = {
+    'item_title': 'draft',
+    'additional_lookup': {
+        'url': 'regex("[\d]+")',
+        'field': 'slug'
+    },
+    'datasource': {
+        'source': 'posts',
+        'filter': {'state': 'draft'},
     },
     'resource_methods': ['GET'],
     'cache_control': 'max-age=300,must-revalidate',
@@ -283,6 +310,7 @@ postcategories = {
 
 DOMAIN = {
     'posts': posts,
+    'drafts': drafts,
     'users': users,
     'members': members,
     'contacts': contacts,
