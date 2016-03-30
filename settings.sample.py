@@ -11,22 +11,39 @@ post_schema = {
   'name': {
     'type': 'string',
   },
-  'slug': {
+  'availability': {
+    'type': 'integer',
+  },
+  'byline': {
     'type': 'string',
   },
   'title': {
     'type': 'string',
   },
-  'subtitle': {
+  'firstImage': {
     'type': 'string',
   },
-  'byline': {
+  'excerpt': {
     'type': 'string',
   },
-  'state': {
+  'preset_tags': {
+    'type': 'list',
+  },
+  'thumbnail': {
     'type': 'string',
   },
-  'authors': {
+  'metadata': {
+    'type': 'dict',
+    'schema': {
+      'metadata_text_key_name': {
+        'type': 'string',
+      },
+    }
+  },
+  'lastUpdate': {
+    'type': 'string',
+  },
+  'tags': {
     'type': 'list',
     'schema': {
         'type': 'objectid',
@@ -37,10 +54,10 @@ post_schema = {
         },
     },
   },
-  'publishedDate': {
+  'author_display': {
     'type': 'string',
   },
-  'image': {
+  'slug': {
     'type': 'string',
   },
   'categories': {
@@ -65,7 +82,7 @@ post_schema = {
          },
      },
   },
-  'style': {
+  'published': {
     'type': 'string',
   },
   'content': {
@@ -89,7 +106,7 @@ post_schema = {
       },
     }
   },
-  'relateds': {
+  'author_list': {
     'type': 'list',
     'schema': {
         'type': 'objectid',
@@ -100,10 +117,58 @@ post_schema = {
          },
      }, 
   },
-  'og_title': {
+  'lastPublish': {
     'type': 'string',
   },
-  'og_description': {
+  'user_id': {
+    'type': 'string',
+  },
+  'square_image': {
+    'type': 'string',
+  },
+  'price_credits': {
+    'type': 'string',
+  },
+  'createdBy': {
+    'type': 'string',
+  },
+  'isPublishedVersion': {
+    'type': 'boolean',
+  },
+  'facebook_enable': {
+    'type': 'integer',
+  },
+  'facebook_image': {
+    'type': 'string',
+  },
+  'facebook_text': {
+    'type': 'string',
+  },
+  'id': {
+    'type': 'integer',
+  },
+  'atavist_id': {
+    'type': 'integer',
+  },
+  'status': {
+    'type': 'string',
+  },
+  'pub_date': {
+    'type': 'string',
+  },
+  'category_id': {
+    'type': 'string',
+  },
+  'lastUpdateBy': {
+    'type': 'string',
+  },
+  'url': {
+    'type': 'string',
+  },
+  'protected_tags': {
+    'type': 'list',
+  },
+  'preview_image': {
     'type': 'string',
   }
 }
