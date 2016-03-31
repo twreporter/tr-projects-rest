@@ -11,39 +11,22 @@ post_schema = {
   'name': {
     'type': 'string',
   },
-  'availability': {
-    'type': 'integer',
-  },
-  'byline': {
+  'slug': {
     'type': 'string',
   },
   'title': {
     'type': 'string',
   },
-  'firstImage': {
+  'subtitle': {
     'type': 'string',
   },
-  'excerpt': {
+  'byline': {
     'type': 'string',
   },
-  'preset_tags': {
-    'type': 'list',
-  },
-  'thumbnail': {
+  'state': {
     'type': 'string',
   },
-  'metadata': {
-    'type': 'dict',
-    'schema': {
-      'metadata_text_key_name': {
-        'type': 'string',
-      },
-    }
-  },
-  'lastUpdate': {
-    'type': 'string',
-  },
-  'tags': {
+  'authors': {
     'type': 'list',
     'schema': {
         'type': 'objectid',
@@ -54,10 +37,10 @@ post_schema = {
         },
     },
   },
-  'author_display': {
+  'publishedDate': {
     'type': 'string',
   },
-  'slug': {
+  'image': {
     'type': 'string',
   },
   'categories': {
@@ -82,7 +65,7 @@ post_schema = {
          },
      },
   },
-  'published': {
+  'style': {
     'type': 'string',
   },
   'content': {
@@ -106,7 +89,7 @@ post_schema = {
       },
     }
   },
-  'author_list': {
+  'relateds': {
     'type': 'list',
     'schema': {
         'type': 'objectid',
@@ -117,58 +100,10 @@ post_schema = {
          },
      }, 
   },
-  'lastPublish': {
+  'og_title': {
     'type': 'string',
   },
-  'user_id': {
-    'type': 'string',
-  },
-  'square_image': {
-    'type': 'string',
-  },
-  'price_credits': {
-    'type': 'string',
-  },
-  'createdBy': {
-    'type': 'string',
-  },
-  'isPublishedVersion': {
-    'type': 'boolean',
-  },
-  'facebook_enable': {
-    'type': 'integer',
-  },
-  'facebook_image': {
-    'type': 'string',
-  },
-  'facebook_text': {
-    'type': 'string',
-  },
-  'id': {
-    'type': 'integer',
-  },
-  'atavist_id': {
-    'type': 'integer',
-  },
-  'status': {
-    'type': 'string',
-  },
-  'pub_date': {
-    'type': 'string',
-  },
-  'category_id': {
-    'type': 'string',
-  },
-  'lastUpdateBy': {
-    'type': 'string',
-  },
-  'url': {
-    'type': 'string',
-  },
-  'protected_tags': {
-    'type': 'list',
-  },
-  'preview_image': {
+  'og_description': {
     'type': 'string',
   }
 }
