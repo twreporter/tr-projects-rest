@@ -201,6 +201,27 @@ member_schema = {
   }
 }
 
+account_schema = {
+    'username': {
+       'type': 'string',
+       'required': True,
+       'unique': True,
+    },
+    'password': {
+       'type': 'string',
+       'required': True,
+    },
+    'roles': {
+        'type': 'list',
+        'allowed': ['user', 'superuser', 'admin'],
+        'required': True,
+    },
+    'token': {
+        'type': 'string',
+        'required': True,
+    }
+}
+
 posts = {
     'item_title': 'post',
     'additional_lookup': {
@@ -308,6 +329,18 @@ postcategories = {
     }
 }
 
+account = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'username',
+    },
+    'resource_methods': ['GET'],
+    'allowed_roles': ['superuser', 'admin'],
+    'cache_control': '',
+    'cache_expires': 0,
+    'schema': account_schema,
+}
+
 DOMAIN = {
     'posts': posts,
     'drafts': drafts,
@@ -316,6 +349,7 @@ DOMAIN = {
     'contacts': contacts,
     'tags': tags,
     'postcategories': postcategories,
+    'account': account,
     }
 
 XML = False
