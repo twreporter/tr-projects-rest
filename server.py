@@ -43,8 +43,7 @@ def before_returning_posts(response):
     else: # there is no parameter for paragraph, so we won't add the filter for the content
         return response
 
-#app = Eve(auth=RolesAuth)
-app = Eve()
+app = Eve(auth=RolesAuth)
 app.on_replace_article += lambda item, original: remove_extra_fields(item)
 app.on_insert_article += lambda items: remove_extra_fields(items[0])
 app.on_insert_accounts += add_token
