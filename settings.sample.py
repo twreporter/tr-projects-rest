@@ -183,14 +183,20 @@ member_schema = {
   'state': {
       'type': 'dict',
       'schema': {
-          'post': {
-            'type': 'objectid',
-            'data_relation': {
-              'resource': 'posts',
-              'field': '_id',
-              'embeddable': True
+          'bookmark': {
+            'type': 'list',
+            'schema': {
+              'type': 'objectid',
+              'data_relation': {
+                'resource': 'posts',
+                'field': '_id',
+                'embeddabole': True
+              },
             },
           },
+          'bookmark_count': {
+            'type': 'integer',
+          }
           'position': {
             'type': 'string',
           }
@@ -334,7 +340,7 @@ account = {
         'url': 'regex("[\w]+")',
         'field': 'username',
     },
-    'resource_methods': ['GET'],
+    'resource_methods': ['GET', 'POST'],
     'allowed_roles': ['superuser', 'admin'],
     'cache_control': '',
     'cache_expires': 0,
