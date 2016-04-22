@@ -2,20 +2,27 @@
 
 twreporter middle-ware rest-api server
 
-## Requirements
-
+## Requirements 
 ``` shell
+# linux
 apt-get install libevent-dev
 apt-get install python-all-dev
 apt-get install python-pip
 pip install -r requirements.txt
-```
+
+# mac
+# install homebrew first
+brew install python
+/usr/local/bin/pip install -r requirements.txt
+``` 
 
 ## Development
-
 ``` shell
 # set mongo database in settings.py
 python server.py
+
+# mac
+/usr/local/bin/python server.py
 ```
 
 ## Deploy
