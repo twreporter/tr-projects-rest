@@ -231,7 +231,7 @@ account_schema = {
 posts = {
     'item_title': 'post',
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w-]+")',
         'field': 'slug'
     },
     'datasource': {
