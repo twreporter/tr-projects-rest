@@ -31,7 +31,7 @@ sudo python gevent_web.py &
 ## Examples
 
 http://localhost:8080/posts
-http://localhost:8080/posts/56cec6169410925ff7512154
+http://localhost:8080/posts/the-post-slug
 http://localhost:8080/posts?embedded={'authors':1,'tags':1,'categories':1}
 http://localhost:8080/posts?content_type=html
 http://localhost:8080/contacts?where={"_id":{"$in":["56cec38678c3ee45f715b077","56cec37a78c3ee45f715afd6"]}}
