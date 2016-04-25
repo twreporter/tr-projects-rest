@@ -196,7 +196,7 @@ member_schema = {
           },
           'bookmark_count': {
             'type': 'integer',
-          }
+          },
           'position': {
             'type': 'string',
           }
@@ -231,7 +231,7 @@ account_schema = {
 posts = {
     'item_title': 'post',
     'additional_lookup': {
-        'url': 'regex("[\d]+")',
+        'url': 'regex("[\w-]+")',
         'field': 'slug'
     },
     'datasource': {
