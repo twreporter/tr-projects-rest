@@ -105,6 +105,9 @@ post_schema = {
   },
   'og_description': {
     'type': 'string',
+  },
+  'og_image': {
+    'type': 'string',
   }
 }
 
