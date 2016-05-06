@@ -20,13 +20,43 @@ post_schema = {
   'subtitle': {
     'type': 'string',
   },
-  'byline': {
-    'type': 'string',
-  },
   'state': {
     'type': 'string',
   },
-  'authors': {
+  'writters': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'contacts',
+            'field': '_id',
+            'embeddable': True
+        },
+    },
+  },
+  'photographers': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'contacts',
+            'field': '_id',
+            'embeddable': True
+        },
+    },
+  },
+  'designers': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'contacts',
+            'field': '_id',
+            'embeddable': True
+        },
+    },
+  },
+  'engineers': {
     'type': 'list',
     'schema': {
         'type': 'objectid',
