@@ -21,13 +21,11 @@ post_schema = {
     'type': 'string',
   },
   'heroImage': {
-    'schema': {
-        'type': 'objectid',
-        'data_relation': {
-            'resource': 'images',
-            'field': '_id',
-            'embeddable': True
-        },
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
     },
   },
   'state': {
@@ -269,31 +267,51 @@ account_schema = {
 }
 
 image_schema = {
-    'artist': {
-        'type': 'string',
+  'copyright': {
+    'type': 'string',
+  },
+  'tags': {
+    'type': 'list',
+    'schema': {
+      'type': 'objectid',
+      'data_relation': {
+        'resource': 'tags',
+        'field': '_id',
+        'embeddable': True
+      },
     },
-    'description': {
+  },
+  'image': {
+    'type': 'dict',
+    'schema': {
+      'artist': {
         'type': 'string',
-    },
-    'filename': {
+      },
+      'description': {
         'type': 'string',
-    },
-    'filetype': {
+      },
+      'filename': {
         'type': 'string',
-    },
-    'height': {
+      },
+      'filetype': {
+        'type': 'string',
+      },
+      'height': {
         'type': 'number',
-    },
-    'width': {
+      },
+      'width': {
         'type': 'number',
-    },
-    'size': {
+      },
+      'size': {
         'type': 'number',
-    },
-    'url': {
+      },
+      'url': {
         'type': 'string',
-    }
+      }
+    },
+  },
 }
+
 posts = {
     'item_title': 'post',
     'additional_lookup': {
