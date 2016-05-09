@@ -142,7 +142,12 @@ post_schema = {
     'type': 'string',
   },
   'og_image': {
-    'type': 'string',
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
+    },
   }
 }
 
