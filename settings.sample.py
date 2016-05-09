@@ -429,6 +429,7 @@ DOMAIN = {
     'tags': tags,
     'postcategories': postcategories,
     'account': account,
+    'images': images,
     }
 
 XML = False
