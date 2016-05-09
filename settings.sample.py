@@ -20,6 +20,16 @@ post_schema = {
   'subtitle': {
     'type': 'string',
   },
+  'heroImage': {
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'images',
+            'field': '_id',
+            'embeddable': True
+        },
+    },
+  },
   'state': {
     'type': 'string',
   },
@@ -68,9 +78,6 @@ post_schema = {
     },
   },
   'publishedDate': {
-    'type': 'string',
-  },
-  'image': {
     'type': 'string',
   },
   'categories': {
@@ -261,6 +268,32 @@ account_schema = {
     }
 }
 
+image_schema = {
+    'artist': {
+        'type': 'string',
+    },
+    'description': {
+        'type': 'string',
+    },
+    'filename': {
+        'type': 'string',
+    },
+    'filetype': {
+        'type': 'string',
+    },
+    'height': {
+        'type': 'number',
+    },
+    'width': {
+        'type': 'number',
+    },
+    'size': {
+        'type': 'number',
+    },
+    'url': {
+        'type': 'string',
+    }
+}
 posts = {
     'item_title': 'post',
     'additional_lookup': {
@@ -378,6 +411,13 @@ account = {
     'cache_control': '',
     'cache_expires': 0,
     'schema': account_schema,
+}
+
+images = {
+    'resource_methods': ['GET'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'schema': image_schema,
 }
 
 DOMAIN = {
