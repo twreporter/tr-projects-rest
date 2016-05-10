@@ -272,6 +272,20 @@ account_schema = {
 }
 
 image_schema = {
+  'photographer': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'contacts',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
+  'description': {
+    'type': 'string',
+  },
+  'sale': {
+    'type': 'Boolean',
+  },
   'copyright': {
     'type': 'string',
   },
