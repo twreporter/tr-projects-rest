@@ -351,7 +351,7 @@ posts = {
 drafts = {
     'item_title': 'draft',
     'additional_lookup': {
-        'url': 'regex("[\d]+")',
+        'url': 'regex("[\w-]+")',
         'field': 'slug'
     },
     'datasource': {
