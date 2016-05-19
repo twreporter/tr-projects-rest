@@ -192,7 +192,15 @@ contact_schema = {
   },
   'bio': {
     'type': 'string',
-  }
+  },
+  'image': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
 }
 
 member_schema = {
@@ -351,7 +359,7 @@ posts = {
 drafts = {
     'item_title': 'draft',
     'additional_lookup': {
-        'url': 'regex("[\d]+")',
+        'url': 'regex("[\w-]+")',
         'field': 'slug'
     },
     'datasource': {
