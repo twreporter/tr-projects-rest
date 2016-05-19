@@ -409,6 +409,7 @@ contacts = {
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': True,
+    'embedded_fields': ['image'],
     'schema': contact_schema
 }
 
