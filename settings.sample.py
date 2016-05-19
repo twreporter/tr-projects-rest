@@ -192,7 +192,15 @@ contact_schema = {
   },
   'bio': {
     'type': 'string',
-  }
+  },
+  'image': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
 }
 
 member_schema = {
