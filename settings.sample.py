@@ -135,6 +135,9 @@ post_schema = {
          },
      }, 
   },
+  'copyright': {
+    'type': 'string',
+  },
   'og_title': {
     'type': 'string',
   },
