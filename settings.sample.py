@@ -28,6 +28,9 @@ post_schema = {
       'embeddable': True
     },
   },
+  'heroImageSize': {
+    'type': 'string'
+  },
   'state': {
     'type': 'string',
   },
