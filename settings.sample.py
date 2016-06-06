@@ -28,9 +28,6 @@ post_schema = {
       'embeddable': True
     },
   },
-  'heroImageSize': {
-    'type': 'string'
-  },
   'state': {
     'type': 'string',
   },
@@ -285,6 +282,65 @@ account_schema = {
     }
 }
 
+audios_schema = {
+  'description': {
+    'type': 'string',
+  },
+  'audio': {
+    'type': 'dict',
+    'schema': {
+        'filetype': {
+          'type': 'string',
+        },
+        'filename': {
+          'type': 'string',
+        },
+        'originalname': {
+          'type': 'string',
+        },
+        'path': {
+          'type': 'string',
+        },
+        'projectId': {
+          'type': 'string',
+        },
+        'size': {
+          'type': 'string',
+        },
+        'url': {
+          'type': 'string',
+        },
+    },
+  },  
+  'heroImage': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
+  'tags': {
+    'type': 'list',
+    'schema': {
+      'type': 'objectid',
+      'data_relation': {
+        'resource': 'tags',
+        'field': '_id',
+        'embeddable': True
+      },
+    },
+  },
+  'photographer': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'contacts',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
+}
+
 image_schema = {
   'photographer': {
     'type': 'objectid',
@@ -473,6 +529,13 @@ images = {
     'schema': image_schema,
 }
 
+audios = {
+    'resource_methods': ['GET'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'schema': audios_schema,
+}
+
 DOMAIN = {
     'posts': posts,
     'drafts': drafts,
@@ -483,6 +546,7 @@ DOMAIN = {
     'postcategories': postcategories,
     'account': account,
     'images': images,
+    'audios': audios,
     }
 
 XML = False
