@@ -135,6 +135,17 @@ post_schema = {
          },
      }, 
   },
+  'topic': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'posts',
+            'field': '_id',
+            'embeddable': True
+         },
+     }, 
+  },
   'copyright': {
     'type': 'string',
   },
