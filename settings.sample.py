@@ -146,6 +146,9 @@ post_schema = {
          },
      }, 
   },
+  'extra_byline': {
+    'type': 'string',
+  },
   'copyright': {
     'type': 'string',
   },
