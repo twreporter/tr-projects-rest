@@ -33,10 +33,11 @@ def before_returning_posts(response):
         for item in items:
             new_item = {}
             for type_seq in paragraph:
-                new_item[type_seq] = {}
-                for data_type in content_type_array:
-                    if data_type in item['content'][type_seq].keys():
-                        new_item[type_seq][data_type] = item['content'][type_seq][data_type]
+                if (type_seq in item['content'].keys()):
+                    new_item[type_seq] = {}
+                    for data_type in content_type_array:
+                        if data_type in item['content'][type_seq].keys():
+                            new_item[type_seq][data_type] = item['content'][type_seq][data_type]
             item['content'] = new_item
             new_response_array.append(item)
         response['_items'] = new_response_array
