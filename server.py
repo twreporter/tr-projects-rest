@@ -28,7 +28,6 @@ def before_returning_posts(response):
     new_response_array = []
     paragraph = ['brief', 'extended']
     content_type = request.args.get('content_type')
-    print content_type
     if content_type: # check if we need to add the filter
         content_type_array = content_type.split(',')
         for item in items:
