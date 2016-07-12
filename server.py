@@ -39,7 +39,6 @@ def before_returning_posts(response):
                         if data_type in item['content'][type_seq].keys():
                             new_item[type_seq][data_type] = item['content'][type_seq][data_type]
             item['content'] = new_item
-            print item['content']
             new_response_array.append(item)
         response['_items'] = new_response_array
     else: # there is no parameter for paragraph, so we won't add the filter for the content
