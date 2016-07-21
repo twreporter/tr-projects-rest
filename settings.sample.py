@@ -7,6 +7,32 @@ MONGO_DBNAME = 'keystone-test'
 DEBUG = False
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE'] if DEBUG else ['GET']
 
+meta_schema = {
+  'name': {
+    'type': 'string',
+  },
+  'slug': {
+    'type': 'string',
+  },
+  'title': {
+    'type': 'string',
+  },
+  'subtitle': {
+    'type': 'string',
+  },
+  'heroImage': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
+  'publishedDate': {
+    'type': 'string',
+  },
+}
+
 post_schema = {
   'name': {
     'type': 'string',
@@ -89,6 +115,28 @@ post_schema = {
          },
      },
   },
+  'topics': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'topics',
+            'field': '_id',
+            'embeddable': True
+         },
+     },
+  },
+  #'topics_ref': {
+  #  'type': 'list',
+  #  'schema': {
+  #      'type': 'objectid',
+  #      'data_relation': {
+  #          'resource': 'meta',
+  #          'field': 'topics',
+  #          'embeddable': True
+  #       },
+  #   },
+  #},
   'tags': {
     'type': 'list',
     'schema': {
@@ -129,18 +177,7 @@ post_schema = {
     'schema': {
         'type': 'objectid',
         'data_relation': {
-            'resource': 'posts',
-            'field': '_id',
-            'embeddable': True
-         },
-     }, 
-  },
-  'topic': {
-    'type': 'list',
-    'schema': {
-        'type': 'objectid',
-        'data_relation': {
-            'resource': 'posts',
+            'resource': 'meta',
             'field': '_id',
             'embeddable': True
          },
@@ -355,6 +392,12 @@ audios_schema = {
   },
 }
 
+topics_schema = {
+  'name': {
+    'type': 'string',
+  }
+}
+
 image_schema = {
   'photographer': {
     'type': 'objectid',
@@ -426,13 +469,29 @@ posts = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['writters','photographers','designers','engineers','heroImage'],
+    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'relateds'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
     'schema': post_schema
 }
 
+meta = {
+    'item_title': 'draft',
+    'additional_lookup': {
+        'url': 'regex("[\w-]+")',
+        'field': 'slug'
+    },
+    'datasource': {
+        'source': 'posts',
+        'filter': {'state': 'published'},
+    },
+    'resource_methods': ['GET'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': False,
+    'schema': meta_schema
+}
 drafts = {
     'item_title': 'draft',
     'additional_lookup': {
@@ -457,8 +516,8 @@ users = {
         'field': 'name'
     },
     'resource_methods': ['GET'],
-    'cache_control': 'max-age=300,must-revalidate',
-    'cache_expires': 300,
+    'cache_control': 'max-age=60,must-revalidate',
+    'cache_expires': 60,
     'allow_unknown': False,
     'schema': user_schema
 }
@@ -470,8 +529,8 @@ members = {
         'field': 'member_id'
     },
     'resource_methods': ['GET', 'POST'],
-    'cache_control': 'max-age=300,must-revalidate',
-    'cache_expires': 300,
+    'cache_control': 'max-age=60,must-revalidate',
+    'cache_expires': 60,
     'allow_unknown': False,
     'schema': member_schema
 }
@@ -488,6 +547,19 @@ contacts = {
     'allow_unknown': True,
     'embedded_fields': ['image'],
     'schema': contact_schema
+}
+
+topics = {
+    'item_title': 'topic',
+    'additional_lookup': {
+        'url': 'regex(".+")',
+        'field': 'name'
+    },
+    'resource_methods': ['GET'],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': True,
+    'schema': topics_schema
 }
 
 tags = {
@@ -553,10 +625,12 @@ audios = {
 DOMAIN = {
     'posts': posts,
     'drafts': drafts,
+    'meta': meta,
     'users': users,
     'members': members,
     'contacts': contacts,
     'tags': tags,
+    'topics': topics,
     'postcategories': postcategories,
     'account': account,
     'images': images,
