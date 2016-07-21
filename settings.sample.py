@@ -20,6 +20,17 @@ meta_schema = {
   'subtitle': {
     'type': 'string',
   },
+  'topics': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'topics',
+            'field': '_id',
+            'embeddable': True
+         },
+     },
+  },
   'heroImage': {
     'type': 'objectid',
     'data_relation': {
