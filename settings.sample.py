@@ -194,7 +194,7 @@ post_schema = {
          },
      }, 
   },
-  'extra_byline': {
+  'extend_byline': {
     'type': 'string',
   },
   'copyright': {
