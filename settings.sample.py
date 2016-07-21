@@ -177,7 +177,7 @@ post_schema = {
     'schema': {
         'type': 'objectid',
         'data_relation': {
-            'resource': 'posts',
+            'resource': 'meta',
             'field': '_id',
             'embeddable': True
          },
@@ -469,7 +469,7 @@ posts = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'topics_ref'],
+    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'relateds'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
