@@ -498,7 +498,7 @@ meta = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['heroImage', 'topics'],
+    'embedded_fields': ['topics'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
