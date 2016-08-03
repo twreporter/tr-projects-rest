@@ -26,9 +26,15 @@ def add_token(documents):
 def before_returning_posts(response):
     items = response['_items']
     new_response_array = []
-    paragraph = ['brief', 'extended']
     content_type = request.args.get('content_type')
-    if content_type: # check if we need to add the filter
+    content = request.args.get('content')
+    if (content and content == 'meta'):
+        for item in items:
+            del item['content']['extended']
+            new_response_array.append(item)
+        response['_items'] = new_response_array
+    elif content_type: # check if we need to add the filter
+        paragraph = ['brief', 'extended']
         content_type_array = content_type.split(',')
         for item in items:
             new_item = {}
@@ -41,8 +47,8 @@ def before_returning_posts(response):
             item['content'] = new_item
             new_response_array.append(item)
         response['_items'] = new_response_array
-    else: # there is no parameter for paragraph, so we won't add the filter for the content
-        return response
+
+    return response
 
 #app = Eve(auth=RolesAuth)
 app = Eve()
