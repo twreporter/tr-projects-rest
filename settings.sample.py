@@ -42,6 +42,9 @@ meta_schema = {
   'publishedDate': {
     'type': 'string',
   },
+  'og_description': {
+    'type': 'string',
+  },
 }
 
 post_schema = {
@@ -498,7 +501,7 @@ meta = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['topics'],
+    'embedded_fields': ['heroImage','topics'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
