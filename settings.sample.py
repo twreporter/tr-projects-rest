@@ -39,6 +39,9 @@ meta_schema = {
       'embeddable': True
     },
   },
+  'isFeatured': {
+    'type': 'boolean',
+  },
   'publishedDate': {
     'type': 'string',
   },
@@ -205,6 +208,9 @@ post_schema = {
   },
   'og_title': {
     'type': 'string',
+  },
+  'isFeatured': {
+    'type': 'boolean',
   },
   'og_description': {
     'type': 'string',
