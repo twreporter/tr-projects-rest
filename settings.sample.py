@@ -198,15 +198,10 @@ post_schema = {
   'content': {
     'type': 'dict',
     'schema': {
-      'extended': {
-        'type': 'dict',
-        'schema': {
-            "html": {
-                "type": "string",
-            },
-        },
-      },
-    }
+       "html": {
+          "type": "string",
+       },
+     },  
   },
   'relateds': {
     'type': 'list',
