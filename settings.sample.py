@@ -20,6 +20,14 @@ meta_schema = {
   'subtitle': {
     'type': 'string',
   },
+  'brief': {
+    'type': 'dict',
+    'schema': {
+      "html": {
+        "type": "string",
+      },
+    },
+  },
   'topics': {
     'type': 'list',
     'schema': {
@@ -179,26 +187,21 @@ post_schema = {
   'style': {
     'type': 'string',
   },
+  'brief': {
+    'type': 'dict',
+    'schema': {
+      "html": {
+        "type": "string",
+      },
+    },
+  },
   'content': {
     'type': 'dict',
     'schema': {
-      'brief': {
-        'type': 'dict',
-        'schema': {
-            "html": {
-                "type": "string",
-            },
-        },
-      },
-      'extended': {
-        'type': 'dict',
-        'schema': {
-            "html": {
-                "type": "string",
-            },
-        },
-      },
-    }
+       "html": {
+          "type": "string",
+       },
+     },  
   },
   'relateds': {
     'type': 'list',
