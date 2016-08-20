@@ -58,6 +58,9 @@ meta_schema = {
          },
      },
   },
+  'style': {
+    'type': 'string',
+  },
   'tags': {
     'type': 'list',
     'schema': {
