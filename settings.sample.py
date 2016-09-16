@@ -1,11 +1,23 @@
 # MONGO DATABASE SETTINGS
 MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
-MONGO_DBNAME = 'keystone-test'
+MONGO_DBNAME = 'keystone'
 
 # ALLOW ACTIONS
 DEBUG = False
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE'] if DEBUG else ['GET']
+
+bookmark_schema = {
+  'slug': {
+    'type': 'string',
+  },
+  'bookmark': {
+    'type': 'string',
+  },
+  'bookmark_order': {
+    'type': 'number',
+  }
+}
 
 meta_schema = {
   'name': {
@@ -59,6 +71,9 @@ meta_schema = {
      },
   },
   'style': {
+    'type': 'string',
+  },
+  'bookmark': {
     'type': 'string',
   },
   'tags': {
@@ -203,6 +218,23 @@ post_schema = {
   },
   'style': {
     'type': 'string',
+  },
+  'bookmark': {
+    'type': 'string',
+  },
+  'bookmark_order': {
+    'type': 'number',
+  },
+  'related_bookmarks': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'bookmarks',
+            'field': '_id',
+            'embeddable': True
+         },
+     }, 
   },
   'brief': {
     'type': 'dict',
@@ -520,11 +552,29 @@ posts = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics'],
+    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'related_bookmarks'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
     'schema': post_schema
+}
+
+bookmarks = {
+    'item_title': 'bookmark',
+    'additional_lookup': {
+        'url': 'regex("[\w-]+")',
+        'field': 'slug'
+    },
+    'datasource': {
+        'source': 'posts',
+        'filter': {'state': 'published'},
+    },
+    'resource_methods': ['GET'],
+    'embedded_fields': [],
+    'cache_control': 'max-age=300,must-revalidate',
+    'cache_expires': 300,
+    'allow_unknown': False,
+    'schema': bookmark_schema
 }
 
 meta = {
@@ -544,6 +594,7 @@ meta = {
     'allow_unknown': False,
     'schema': meta_schema
 }
+
 drafts = {
     'item_title': 'draft',
     'additional_lookup': {
@@ -675,6 +726,7 @@ audios = {
 }
 
 DOMAIN = {
+    'bookmarks': bookmarks,
     'posts': posts,
     'drafts': drafts,
     'meta': meta,
