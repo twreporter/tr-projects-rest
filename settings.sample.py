@@ -111,6 +111,14 @@ post_schema = {
   'subtitle': {
     'type': 'string',
   },
+  'leading_video': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'videos',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
   'heroImage': {
     'type': 'objectid',
     'data_relation': {
@@ -121,7 +129,7 @@ post_schema = {
   },
   'heroImageSize': {
     'type': 'string',
-  },  
+  }, 
   'state': {
     'type': 'string',
   },
@@ -475,6 +483,35 @@ audios_schema = {
   },
 }
 
+video_schema = {
+  'title': {
+    'type': 'string',
+  },
+  'video': {
+    'type': 'dict',
+    'schema': {
+        'size': {
+          'type': 'string',
+        },
+        'url': {
+          'type': 'string',
+        },
+    },
+  },  
+  'tags': {
+    'type': 'list',
+    'schema': {
+      'type': 'objectid',
+      'data_relation': {
+        'resource': 'tags',
+        'field': '_id',
+        'embeddable': True
+      },
+    },
+  }
+}
+
+
 topics_schema = {
   'name': {
     'type': 'string',
@@ -552,7 +589,7 @@ posts = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'related_bookmarks'],
+    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'related_bookmarks', 'leading_video'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
@@ -659,8 +696,8 @@ topics = {
         'field': 'name'
     },
     'resource_methods': ['GET'],
-    'cache_control': 'max-age=300,must-revalidate',
-    'cache_expires': 300,
+    'cache_control': 'max-age=3600,must-revalidate',
+    'cache_expires': 3600,
     'allow_unknown': True,
     'schema': topics_schema
 }
@@ -672,8 +709,8 @@ tags = {
         'field': 'name'
     },
     'resource_methods': ['GET'],
-    'cache_control': 'max-age=300,must-revalidate',
-    'cache_expires': 300,
+    'cache_control': 'max-age=3600,must-revalidate',
+    'cache_expires': 3600,
     'allow_unknown': True,
     'schema': {
       'name': {
@@ -689,8 +726,8 @@ postcategories = {
         'field': 'name'
     },
     'resource_methods': ['GET'],
-    'cache_control': 'max-age=300,must-revalidate',
-    'cache_expires': 300,
+    'cache_control': 'max-age=3600,must-revalidate',
+    'cache_expires': 3600,
     'allow_unknown': True,
     'schema': {
       'name': {
@@ -713,16 +750,26 @@ account = {
 
 images = {
     'resource_methods': ['GET'],
-    'cache_control': 'max-age=300,must-revalidate',
-    'cache_expires': 300,
+    'cache_control': 'max-age=3600,must-revalidate',
+    'cache_expires': 3600,
+    'allow_unknown': False,
     'schema': image_schema,
 }
 
 audios = {
     'resource_methods': ['GET'],
-    'cache_control': 'max-age=300,must-revalidate',
-    'cache_expires': 300,
+    'cache_control': 'max-age=3600,must-revalidate',
+    'cache_expires': 3600,
+    'allow_unknown': False,
     'schema': audios_schema,
+}
+
+videos = {
+    'resource_methods': ['GET'],
+    'cache_control': 'max-age=3600,must-revalidate',
+    'cache_expires': 3600,
+    'allow_unknown': False,
+    'schema': video_schema,
 }
 
 DOMAIN = {
@@ -739,7 +786,8 @@ DOMAIN = {
     'account': account,
     'images': images,
     'audios': audios,
-    }
+    'videos': videos
+  }
 
 XML = False
 IF_MATCH = False
