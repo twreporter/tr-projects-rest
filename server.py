@@ -17,44 +17,66 @@ class RolesAuth(TokenAuth):
         account = accounts.find_one(lookup)
         return account
 
-
 def add_token(documents):
     for document in documents:
         document["token"] = (''.join(random.choice(string.ascii_uppercase)
                                     for x in range(10)))
 
+def filter_hero_image(heroImage):
+    if 'image' in heroImage: 
+        image = filter_gcs_info(heroImage['image'])
+        heroImage['image'] = image
+    return heroImage
+
+def filter_leading_video(leadingVideo):
+    if 'video' in leadingVideo: 
+        video = filter_gcs_info(leadingVideo['video'])
+        leadingVideo['video'] = video
+    return leadingVideo
+
+def filter_gcs_info(gcsObj):
+    if 'gcsDir' in gcsObj:
+      del gcsObj['gcsDir']
+    if 'gcsBucket' in gcsObj:
+      del gcsObj['gcsBucket']
+    if 'filename' in gcsObj:
+      del gcsObj['filename']
+    return gcsObj 
+
+def before_returning_meta(response):
+    items = response['_items']
+    for item in items:
+        if 'brief' in item:
+            del item['brief']['draft']
+            del item['brief']['html']
+        if 'heroImage' in item:
+          item['heroImage'] = filter_hero_image(item['heroImage'])
+        if 'leading_video' in item:
+          item['leading_video'] = filter_leading_video(item['leading_video'])
+    return response
+
 def before_returning_posts(response):
     items = response['_items']
-    new_response_array = []
-    content_type = request.args.get('content_type')
-    content = request.args.get('content')
-    if (content and content == 'meta'):
-        for item in items:
-            del item['content']['extended']
-            new_response_array.append(item)
-        response['_items'] = new_response_array
-    elif content_type: # check if we need to add the filter
-        paragraph = ['brief', 'extended']
-        content_type_array = content_type.split(',')
-        for item in items:
-            new_item = {}
-            for type_seq in paragraph:
-                if (type_seq in item['content'].keys()):
-                    new_item[type_seq] = {}
-                    for data_type in content_type_array:
-                        if data_type in item['content'][type_seq].keys():
-                            new_item[type_seq][data_type] = item['content'][type_seq][data_type]
-            item['content'] = new_item
-            new_response_array.append(item)
-        response['_items'] = new_response_array
-
+    for item in items:
+        if 'brief' in item:
+            del item['brief']['draft']
+            del item['brief']['html']
+        if 'content' in item:
+            del item['content']['draft']
+            del item['content']['html']
+        if 'heroImage' in item:
+          item['heroImage'] = filter_hero_image(item['heroImage'])
+        if 'leading_video' in item:
+          item['leading_video'] = filter_leading_video(item['leading_video'])
     return response
 
 #app = Eve(auth=RolesAuth)
 app = Eve()
+
 app.on_replace_article += lambda item, original: remove_extra_fields(item)
 app.on_insert_article += lambda items: remove_extra_fields(items[0])
 app.on_insert_accounts += add_token
+app.on_fetched_resource_meta += before_returning_meta
 app.on_fetched_resource_posts += before_returning_posts
 
 def remove_extra_fields(item):
