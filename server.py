@@ -23,7 +23,6 @@ def add_token(documents):
                                     for x in range(10)))
 
 def filter_hero_image(heroImage):
-    print heroImage
     if 'image' in heroImage: 
         image = filter_gcs_info(heroImage['image'])
         heroImage['image'] = image
