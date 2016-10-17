@@ -23,6 +23,7 @@ def add_token(documents):
                                     for x in range(10)))
 
 def filter_hero_image(heroImage):
+    print heroImage
     if 'image' in heroImage: 
         image = filter_gcs_info(heroImage['image'])
         heroImage['image'] = image
@@ -50,9 +51,8 @@ def before_returning_meta(response):
             del item['brief']['draft']
             del item['brief']['html']
         if 'heroImage' in item:
-          item['heroImage'] = filter_hero_image(item['heroImage'])
-        if 'leading_video' in item:
-          item['leading_video'] = filter_leading_video(item['leading_video'])
+            if item['heroImage'] is not None:
+                item['heroImage'] = filter_hero_image(item['heroImage'])
     return response
 
 def before_returning_posts(response):
@@ -65,9 +65,11 @@ def before_returning_posts(response):
             del item['content']['draft']
             del item['content']['html']
         if 'heroImage' in item:
-          item['heroImage'] = filter_hero_image(item['heroImage'])
+            if item['heroImage'] is not None:
+                item['heroImage'] = filter_hero_image(item['heroImage'])
         if 'leading_video' in item:
-          item['leading_video'] = filter_leading_video(item['leading_video'])
+            if item['leading_video'] is not None:
+                item['leading_video'] = filter_hero_image(item['leading_video'])
     return response
 
 #app = Eve(auth=RolesAuth)
