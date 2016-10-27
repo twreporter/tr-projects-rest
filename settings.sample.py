@@ -180,6 +180,9 @@ post_schema = {
   'publishedDate': {
     'type': 'string',
   },
+  'updatedAt': {
+    'type': 'string',
+  },
   'categories': {
     'type': 'list',
     'schema': {
