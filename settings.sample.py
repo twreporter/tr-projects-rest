@@ -11,6 +11,9 @@ bookmark_schema = {
   'slug': {
     'type': 'string',
   },
+  'style': {
+    'type': 'string',
+  },
   'bookmark': {
     'type': 'string',
   },
