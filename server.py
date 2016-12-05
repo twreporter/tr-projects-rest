@@ -57,34 +57,32 @@ def before_returning_meta(response):
 def before_returning_posts(response):
     items = response['_items']
     for item in items:
-        if 'brief' in item:
-            del item['brief']['draft']
-            del item['brief']['html']
-        if 'content' in item:
-            del item['content']['draft']
-            del item['content']['html']
-        if 'heroImage' in item:
-            if item['heroImage'] is not None:
-                item['heroImage'] = filter_hero_image(item['heroImage'])
-        if 'leading_video' in item:
-            if item['leading_video'] is not None:
-                item['leading_video'] = filter_hero_image(item['leading_video'])
+        item = before_returning_post(item)
     return response
+
+def before_returning_post(response):
+    item = response
+    if 'brief' in item:
+      del item['brief']['draft']
+      del item['brief']['html']
+    if 'content' in item:
+      del item['content']['draft']
+      del item['content']['html']
+    if 'heroImage' in item:
+      if item['heroImage'] is not None:
+        item['heroImage'] = filter_hero_image(item['heroImage'])
+    if 'leading_video' in item:
+      if item['leading_video'] is not None:
+        item['leading_video'] = filter_hero_image(item['leading_video'])
+    return item
 
 #app = Eve(auth=RolesAuth)
 app = Eve()
-
-app.on_replace_article += lambda item, original: remove_extra_fields(item)
-app.on_insert_article += lambda items: remove_extra_fields(items[0])
-app.on_insert_accounts += add_token
 app.on_fetched_resource_meta += before_returning_meta
 app.on_fetched_resource_posts += before_returning_posts
-
-def remove_extra_fields(item):
-  accepted_fields = schema.keys()
-  for field in item.keys():
-    if field not in accepted_fields and field != '_id':
-      del item[field]
+app.on_fetched_item_posts += before_returning_post
+#app.on_fetched_resource_topics += before_returing_topics
+#app.on_fetched_item_topics += before_returning_topic
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080, threaded=True, debug=True)
