@@ -90,7 +90,6 @@ def filter_post(item):
       item['heroImage'] = filter_hero_image(item['heroImage'])
   if 'leading_video' in item:
     if type(item['leading_video'] is dict):
-      print item['leading_video']
       item['leading_video'] = filter_leading_video(item['leading_video'])
   return item
 
