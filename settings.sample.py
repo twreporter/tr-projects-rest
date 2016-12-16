@@ -44,15 +44,7 @@ meta_schema = {
     },
   },
   'topics': {
-    'type': 'list',
-    'schema': {
-        'type': 'objectid',
-        'data_relation': {
-            'resource': 'topics',
-            'field': '_id',
-            'embeddable': True
-         },
-     },
+    'type': 'string',
   },
   'heroImage': {
     'type': 'objectid',
@@ -198,27 +190,8 @@ post_schema = {
      },
   },
   'topics': {
-    'type': 'list',
-    'schema': {
-        'type': 'objectid',
-        'data_relation': {
-            'resource': 'topics',
-            'field': '_id',
-            'embeddable': True
-         },
-     },
+    'type': 'string',
   },
-  #'topics_ref': {
-  #  'type': 'list',
-  #  'schema': {
-  #      'type': 'objectid',
-  #      'data_relation': {
-  #          'resource': 'meta',
-  #          'field': 'topics',
-  #          'embeddable': True
-  #       },
-  #   },
-  #},
   'tags': {
     'type': 'list',
     'schema': {
@@ -517,11 +490,76 @@ video_schema = {
   }
 }
 
-
 topics_schema = {
   'name': {
     'type': 'string',
-  }
+  },
+  'title': {
+    'type': 'string',
+  },
+  'subtitle': {
+    'type': 'string',
+  },
+  'headline': {
+    'type': 'string',
+  },
+  'state': {
+    'type': 'string',
+  },
+  'description': {
+    'type': 'dict',
+    'schema': {
+      "html": {
+        "type": "string",
+      },
+    },
+  },
+  'team_description': {
+    'type': 'dict',
+    'schema': {
+      "html": {
+        "type": "string",
+      },
+    },
+  },
+  'relateds': {
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'meta',
+            'field': '_id',
+            'embeddable': True
+         },
+     }, 
+  },
+  'publishedDate': {
+    'type': 'string',
+  },
+  'leading_image': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
+  'leading_image_portrait': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'images',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
+  'leading_video': {
+    'type': 'objectid',
+    'data_relation': {
+      'resource': 'videos',
+      'field': '_id',
+      'embeddable': True
+    },
+  },
 }
 
 image_schema = {
@@ -595,7 +633,7 @@ posts = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'related_bookmarks', 'leading_video'],
+    'embedded_fields': ['writters','photographers','designers','engineers','heroImage', 'topics', 'related_bookmarks', 'leading_video', 'og_image', 'tags', 'categories'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
@@ -631,7 +669,7 @@ meta = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['heroImage','topics','categories','tags'],
+    'embedded_fields': ['heroImage'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
@@ -704,6 +742,7 @@ topics = {
     'resource_methods': ['GET'],
     'cache_control': 'max-age=3600,must-revalidate',
     'cache_expires': 3600,
+    'embedded_fields': ['leading_image','leading_image_portrait','leading_video'],
     'allow_unknown': True,
     'schema': topics_schema
 }
