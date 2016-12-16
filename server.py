@@ -49,7 +49,8 @@ def get_relateds(item, key):
         tc = app.test_client()
         all_relateds =  ",".join(map(lambda x: '"' + str(x) + '"',item[key]))
         resp = tc.get('meta?where={"_id":{"$in":[' + all_relateds + ']}}', headers=headers)
-        resp_data = json.loads(resp.data)
+        print type(resp.data)
+        resp_data = json.loads(resp.get_data().decode())
         result = []
         for i in item[key]: 
             for j in resp_data['_items']:
@@ -75,7 +76,7 @@ def get_topic(topic_id):
   headers = dict(request.headers)
   tc = app.test_client()
   resp = tc.get('topics/' + str(topic_id) , headers=headers)
-  resp_data = json.loads(resp.data)
+  resp_data = json.loads(resp.get_data().decode())
   return resp_data
 
 def filter_post(item):
