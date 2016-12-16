@@ -49,7 +49,6 @@ def get_relateds(item, key):
         tc = app.test_client()
         all_relateds =  ",".join(map(lambda x: '"' + str(x) + '"',item[key]))
         resp = tc.get('meta?where={"_id":{"$in":[' + all_relateds + ']}}', headers=headers)
-        print type(resp.data)
         resp_data = json.loads(resp.get_data().decode())
         result = []
         for i in item[key]: 
