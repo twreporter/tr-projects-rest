@@ -44,7 +44,15 @@ meta_schema = {
     },
   },
   'topics': {
-    'type': 'string',
+    'type': 'list',
+    'schema': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'topics',
+            'field': '_id',
+            'embeddable': True
+         },
+     },
   },
   'heroImage': {
     'type': 'objectid',
@@ -669,7 +677,7 @@ meta = {
         'filter': {'state': 'published'},
     },
     'resource_methods': ['GET'],
-    'embedded_fields': ['heroImage', 'categories'],
+    'embedded_fields': ['heroImage', 'categories', 'tags', 'topics'],
     'cache_control': 'max-age=300,must-revalidate',
     'cache_expires': 300,
     'allow_unknown': False,
